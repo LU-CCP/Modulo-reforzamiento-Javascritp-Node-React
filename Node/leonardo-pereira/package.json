@@ -9,6 +9,11 @@
   "author": "leonardo pereira",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "restify": "^8.5.1"
+    "mongoose": "^5.8.3",
+    "restify": "^8.5.1",
+    "restify-router": "^0.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
