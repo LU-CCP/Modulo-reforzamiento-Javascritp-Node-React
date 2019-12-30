@@ -19,10 +19,33 @@ router.get("/v1/students", async function(req, res) {
   });
   res.send(200, students);
 });
-
-router.put("/v1/students/:name", async function(req, res) {
+router.post("/v1/students/post", async function(req, res) {
+  console.log(req.body);
   let newStudent = req.body;
-  await userModel.updateOne(req.body, function(err, newStudent) {
+  await userModel.create(req.body, function(err, newStudent) {
+    if (err) {
+      console.log(err);
+    }
+    res.send(200);
+  });
+});
+
+router.put("/v1/students/update/:name", async function(req, res) {
+  let name = req.params;
+  let newStudent = req.body;
+  await userModel.updateOne(name, req.body, function(err, newStudent) {
+    if (err) {
+      console.log(err);
+    }
+
+    res.send(200);
+  });
+});
+
+router.del("/v1/students/delete/:name", async function(req, res) {
+  let name = req.params;
+  let newStudent = req.body;
+  await userModel.deleteOne(name, function(err, newStudent) {
     if (err) {
       console.log(err);
     }
