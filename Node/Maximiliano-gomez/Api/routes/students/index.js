@@ -34,4 +34,13 @@ router.post("/v1/students", async function(req, res) {
   res.json(200, "se ingresaron los datos correctamente");
 });
 
+router.del("/v1/students/delete/:name", async function(req, res) {
+  console.log(req.params);
+  await userModel.deleteOne({ name: req.params.name }),
+    function(err) {
+      if (err) return handleError(err);
+    };
+  res.send(200, "eliminado correctamente");
+});
+
 module.exports = router;
