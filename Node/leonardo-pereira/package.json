@@ -9,6 +9,7 @@
   "author": "leonardo pereira",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "mongoose": "^5.8.3",
     "restify": "^8.5.1",
     "restify-router": "^0.5.1"
