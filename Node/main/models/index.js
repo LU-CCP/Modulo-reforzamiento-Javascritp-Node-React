@@ -1,3 +1,3 @@
-const userModel = require("./students");
+const studentModel = require("./students");
 
-module.exports = userModel;
+module.exports = studentModel;
