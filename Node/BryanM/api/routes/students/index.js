@@ -1,5 +1,5 @@
-const Router = require("restify-router").Router;
 const mongoose = require("mongoose");
+const Router = require("restify-router").Router;
 const Schema = require("mongoose").Schema;
 const studentSchema = new Schema({
   name: String,
