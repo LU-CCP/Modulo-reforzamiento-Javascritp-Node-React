@@ -25,9 +25,13 @@ router.post('/v1/students', function(req,res){
     })
     res.send(200)
 })
-// router.put('./v1/students',function(req,res){
-//     userModel.update({})
-// })
+   router.put('./v1/students',function(req,res){
+    const {oldName,oldSurname,name,surname}= req.body;
+   userModel.update({'name':oldName,'surname':oldSurname},{'name':name,'surname':surname},function(err,res){
+    if (err) console.log(err);
+})
+res.send(200)
+})
 router.del('/v1/students',function(req,res){
     const {name,surname} = req.body;
     userModel.deleteOne({'name': name,'surname': surname},function(err,res){
