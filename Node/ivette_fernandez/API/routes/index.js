@@ -22,19 +22,19 @@ router.get("/v1/students", async function(req, res) {
   res.send(200, students);
 });
 
-router.put("/v2/students", async function(req, res) {
+router.put("/v1/students", async function(req, res) {
   let studentsUpdated;
   await userModel.updateOne({ name: "Pedro" }, req.body, function(err, result) {
     if (err) {
       console.log(err);
     }
     studentsUpdated = result;
-    console.log("students", result);
+    console.log("Updated students", result);
   });
   res.send(200, studentsUpdated);
 });
 
-router.del("/v3/students", async function(req, res) {
+router.del("/v1/students", async function(req, res) {
   let studentsDeleted;
   const { surname } = req.body;
   await userModel.deleteOne({ surname }, function(err, result) {
@@ -47,10 +47,9 @@ router.del("/v3/students", async function(req, res) {
   res.send(200, studentsDeleted);
 });
 
-router.post("/v4/students", async function(req, res) {
+router.post("/v1/students", async function(req, res) {
   let studentsNew;
   const { name, surname } = req.body;
-  //console.log(req.body);
   await userModel.create({ name, surname }, function(err, result) {
     if (err) {
       console.log(err);
