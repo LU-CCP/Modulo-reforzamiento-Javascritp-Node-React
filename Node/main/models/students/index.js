@@ -6,4 +6,4 @@ const studentModel = mongoose.model('students', new Schema({
     surname: String
 }));
 
-module.exports = { studentModel };
+module.exports = studentModel;
