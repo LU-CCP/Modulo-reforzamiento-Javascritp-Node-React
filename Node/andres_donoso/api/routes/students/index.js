@@ -26,7 +26,6 @@ router.post("/v1/students/post", async function(req, res) {
   const newStudent = req.body;
   await userModel.create(req.body, function(err, newStudent) {
     if (err) console.log(err);
-    // saved!
     res.send(200);
   });
 });
