@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const rjwt = require('restify-jwt-community');
 
 const mongoose = require('mongoose'); 
+require('dotenv').config();
 
 
 
@@ -23,9 +24,10 @@ router.add('',adminRoutes);
 router.applyRoutes(server);
 server.listen(8080,async function(){
 
-    await mongoose.connect('mongodb://localhost/HOLA',{
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
+    // await mongoose.connect('mongodb://localhost/HOLA',{
+    //     useNewUrlParser: true,
+    //     useUnifiedTopology: true
+    // });
+    new Database(process.env.DBNAME).connect();
     console.log('server running on port: ',8080);
 })
