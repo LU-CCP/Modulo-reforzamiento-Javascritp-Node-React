@@ -19,7 +19,7 @@ router.get("/v1/students", async function(req, res) {
     students = result;
     console.log("students", result);
   });
-  res.send(200, students);
+  res.send(200, result);
 });
 //ingresar students
 router.post("/v1/studentsPost", async function(req, res) {
