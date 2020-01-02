@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const studentRutas = require("./rutas");
 const login = require("./rutas/admin");
+require("dotenv").config();
 ////
 const jwt = require("jsonwebtoken");
 const rjwt = require("restify-jwt-community");
