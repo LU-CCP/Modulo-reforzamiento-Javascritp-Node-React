@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const rjwt = require("restify-jwt-community");
 
+require("dotenv").config();
+
 const server = restify.createServer();
 server.use(restify.plugins.jsonBodyParser());
 server.use(
