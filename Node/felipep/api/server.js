@@ -9,6 +9,8 @@ const bodyParser = require("body-parser");
 const jsonWebToken = require("jsonwebtoken");
 const restifyJwtCommunity = require("restify-jwt-community");
 
+require("dotenv").config();
+
 const server = restify.createServer();
 server.use(restify.plugins.jsonBodyParser());
 server.use(
@@ -42,7 +44,7 @@ router.add("", adminRoutes);
 router.applyRoutes(server);
 
 server.listen(8080, async () => {
-  await mongoose.connect("mongodb://localhost/db_students", {
+  await mongoose.connect(process.env.DBNAME, {
     userNewUrlParser: true,
     useUnifiedTopology: true
   });
