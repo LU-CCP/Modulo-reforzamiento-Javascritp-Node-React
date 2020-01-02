@@ -2,6 +2,7 @@ const restify = require("restify");
 const Router = require("restify-router").Router;
 const router = new Router();
 const studentsRouters = require("./routes/students");
+const adminRouters = require("./routes/admin");
 const mongoose = require("mongoose");
 const server = restify.createServer();
 const bodyParser = require("body-parser");
@@ -10,6 +11,7 @@ server.get("/api/status", function(req, res) {
   res.send(200, "Api is alive!");
 });
 router.add("", studentsRouters);
+router.add("", adminRouters);
 router.applyRoutes(server);
 
 server.listen(8080, async function() {
