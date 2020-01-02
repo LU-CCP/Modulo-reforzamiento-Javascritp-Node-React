@@ -52,15 +52,23 @@ router.post("/v1/students/save", async function(req, res) {
   res.send(200, "Student guardado");
 });
 
-router.put("/v1/students/edit/:nombre", async function(req, res) {
+router.put("/v1/students/edit/:id", async function(req, res) {
+  let resultado;
   const { params, body } = req;
+  const { id } = params;
   console.log(body, params);
-  await userModel.findOneAndUpdate(params, body, function(err, resp) {
+  console.log(id);
+  await userModel.findByIdAndUpdate(id, { $set: body }, function(err, resp) {
     console.log(resp);
     if (err) {
       console.log(err);
     }
+    resultado = resp;
   });
-  res.send(200);
+  if (resultado) {
+    res.send(200), "Student actualizado";
+  } else {
+    res.send(404, "Student no encontrado");
+  }
 });
 module.exports = router;
