@@ -27,7 +27,7 @@ router.post("/v1/admins/post", async function(req, res) {
       expiresIn: 20
     });
     console.log(token);
-    res.send(200, "autenticacion Correcta");
+    res.send(200, { message: "Autenticacion Correcta", token });
   } else {
     res.send(401, "autenticacion fallida");
   }

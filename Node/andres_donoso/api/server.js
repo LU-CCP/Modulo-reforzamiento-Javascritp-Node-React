@@ -10,6 +10,23 @@ const jwt = require("jsonwebtoken");
 const rjwt = require("restify-jwt-community");
 
 server.use(bodyparser.json());
+
+server.use(function(req, res, next) {
+  console.log(req.url);
+  if (req.url === "/v1/admins/post") {
+    return next();
+  }
+
+  let authorization = req.header("authorization").split(" ");
+  try {
+    var decoded = jwt.verify(authorization[1], "my-secret-key");
+    return next();
+  } catch (err) {
+    res.send(401, { message: "Not Authorized" });
+    return next();
+  }
+});
+
 server.use(
   rjwt({
     secret: "my-secret-key"
