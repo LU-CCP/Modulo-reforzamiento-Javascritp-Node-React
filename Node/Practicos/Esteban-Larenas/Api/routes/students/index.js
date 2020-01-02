@@ -21,4 +21,25 @@ router.get("/v1/students", async function(req, res) {
   res.send(200, students);
 });
 
+// router.put('/students', async function (req, res){
+//   let rowAffected;
+//   try {
+//     const {conditions, document} = req.body;
+//     await studentModel.updateOne(conditions, document, function )
+//   } catch (error) {
+    
+//   }
+// })
+// router.del('/students', async function(req, res){
+//   let rowAffected;
+//   try {
+//     const {conditions} = req.body;
+//     await studentModel.deleteOne(conditions, function (err, result){
+//       res.
+//     })
+//   } catch (err) {
+//     res.send(500, err);
+//   }
+// })
+
 module.exports = router;
