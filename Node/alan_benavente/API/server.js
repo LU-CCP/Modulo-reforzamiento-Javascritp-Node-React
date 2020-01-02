@@ -4,11 +4,9 @@ const studentsRoutes=require('./routes/students');
 const adminRoutes=require('./routes/admin/index');
 const jwt = require('jsonwebtoken');
 const rjwt = require('restify-jwt-community');
-
+const Database = require('./config/db').DataBase
 const mongoose = require('mongoose'); 
 require('dotenv').config();
-
-
 
 const server = restify.createServer();
 server.use(restify.plugins.bodyParser());
@@ -24,10 +22,6 @@ router.add('',adminRoutes);
 router.applyRoutes(server);
 server.listen(8080,async function(){
 
-    // await mongoose.connect('mongodb://localhost/HOLA',{
-    //     useNewUrlParser: true,
-    //     useUnifiedTopology: true
-    // });
-    new Database(process.env.DBNAME).connect();
+    new Database(process.env.DBNAME).connet();
     console.log('server running on port: ',8080);
 })
