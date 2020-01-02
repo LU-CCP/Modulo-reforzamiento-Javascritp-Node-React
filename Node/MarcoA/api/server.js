@@ -1,47 +1,46 @@
+const jwt = require("jsonwebtoken");
+const rjwt = require("restify-jwt-community");
+const mongoose = require("mongoose");
 const restify = require("restify");
 const Router = require("restify-router").Router;
 const router = new Router();
-const studentsRouter = require("./routes/students");
-const adminRouter = require("./routes/admin");
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const rjwt = require("restify-jwt-community");
+const studentsRoutes = require("./routes/students");
+const loginRoutes = require("./routes/admin");
+const bodyParser = require("body-parser");
 
 const server = restify.createServer();
-server.use(restify.plugins.jsonBodyParser());
+server.use(bodyParser.json());
 server.use(
   rjwt({ secret: "my-secret-key" }).unless({
-    path: ["/v1/login"]
+    path: ["/v1/admin/"]
   })
 );
-server.use(function(req, res, next) {
-  if (req.url === "/v1/login") {
+server.use(function(request, response, next) {
+  if (request.url === "/v1/admin/") {
     return next();
   }
-  let authorization = req.header("authorization").split(" ");
+
+  let authorization = request.header("authorization").split(" ");
   try {
     var decoded = jwt.verify(authorization[1], "my-secret-key");
     return next();
-  } catch (err) {
-    res.send(401, { message: "Not authorized" });
+  } catch (error) {
+    response.send(401, { message: "Not authorized" });
     return next();
   }
 });
 
-const bodyParser = require("body-parser");
-server.use(bodyParser.json());
-
-server.get("/api/status", function(req, res) {
-  res.send(200, "Api is alive!");
+server.get("/api/status", function(require, response) {
+  response.send(200, "Api is alive!");
 });
 
-router.add("", studentsRouter);
-router.add("", adminRouter);
+router.add("", studentsRoutes);
+router.add("", loginRoutes);
 router.applyRoutes(server);
 server.listen(8080, async function() {
-  await mongoose.connect("mongodb://localhost/LUDB", {
+  await mongoose.connect("mongodb://localhost/PatricioStar", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
-  console.log("server running on port: ", 8080);
+  console.log("Server running on port 8080");
 });
