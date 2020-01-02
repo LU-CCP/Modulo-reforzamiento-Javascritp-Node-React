@@ -23,7 +23,6 @@ router.get("/v1/students", async function(req, res) {
 });
 
 router.post("/v1/students/post", async function(req, res) {
-  console.log(req.body);
   const newStudent = req.body;
   await userModel.create(req.body, function(err, newStudent) {
     if (err) console.log(err);
@@ -32,21 +31,30 @@ router.post("/v1/students/post", async function(req, res) {
   });
 });
 
-router.post("/v1/students", async function(req, res) {
-  console.log(req.body);
-  const newStudent = req.body;
-  await userModel.create(req.body, function(err, newStudent) {
-    if (err) console.log(err);
-    // saved!
+router.put("/v1/students/update/:_id", async function(req, res) {
+  let id = ({} = req.params);
+  console.log(req.params);
+  console.log(id);
+
+  await userModel.updateOne(id, req.body, function(err, newStudent) {
+    if (err) {
+      console.log(err);
+    }
     res.send(200);
   });
 });
 
-// router.del("/v1/students/delete/:id", async function(req, res) {
-//   userModel.deleteOne(req.params, function(err) {
-//     if (err) return handleError(err);
-//     res.send(200);
-//   });
-// });
+router.del("/v1/students/delete/:_id", async function(req, res) {
+  let id = ({} = req.params);
+  console.log(req.params);
+  console.log(id);
+
+  await userModel.deleteOne(id, function(err, newStudent) {
+    if (err) {
+      console.log(err);
+    }
+    res.send(200);
+  });
+});
 
 module.exports = router;
