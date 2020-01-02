@@ -9,14 +9,58 @@ const studentSchema = new Schema({
 const router = new Router();
 const userModel = mongoose.model("students", studentSchema);
 //url base/v1/students
-router.get("/v1/students", function(req, res) {
-  userModel.find({}, function(err, result) {
+router.get("/v1/students", async function(req, res) {
+  let students;
+  await userModel.find({}, function(err, result) {
     if (err) {
       console.log(err);
     }
+    students = result;
     console.log("students", result);
   });
-  res.send(200, "Hello from students");
+  res.send(200, students);
 });
 
+router.get("/v1/students/delete/:name", async (req, res) => {
+  const { params } = req;
+  console.log(params);
+  let response;
+  await userModel.findOneAndRemove(params, function(err, resp) {
+    console.log(resp);
+    if (err) {
+      console.log(err);
+    }
+    response = resp.deletedCount;
+  });
+  if (response == 0) {
+    res.send(400, "Student no encontrado");
+  } else {
+    res.send(200, "Student eliminado");
+  }
+});
+
+router.post("/v1/students/save", async function(req, res) {
+  const { body } = req;
+  console.log(body);
+  //var stud = new userModel();
+  await userModel.create(body, function(err, resp) {
+    console.log(resp);
+    if (err) {
+      console.log(err);
+    }
+  });
+  res.send(200, "Student guardado");
+});
+
+router.put("/v1/students/edit/:nombre", async function(req, res) {
+  const { params, body } = req;
+  console.log(body, params);
+  await userModel.findOneAndUpdate(params, body, function(err, resp) {
+    console.log(resp);
+    if (err) {
+      console.log(err);
+    }
+  });
+  res.send(200);
+});
 module.exports = router;
