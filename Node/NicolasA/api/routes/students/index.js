@@ -9,7 +9,7 @@ const studentSchema = new Schema({
 const router = new Router();
 const userModel = mongoose.model("students", studentSchema);
 // url base/v1/students
-router.get("/v1/students", async function(request, response) {
+router.get("/v1/students/", async function(request, response) {
   let students;
 
   await userModel.find({}, function(error, result) {
