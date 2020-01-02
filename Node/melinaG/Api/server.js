@@ -4,8 +4,29 @@ const router = new Router();
 const studentsRouters = require("./routes/students");
 const adminRouters = require("./routes/admin");
 const mongoose = require("mongoose");
-const server = restify.createServer();
 const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
+const rjwt = require("restify-jwt-community");
+const server = restify.createServer();
+server.use(restify.plugins.jsonBodyParser());
+server.use(
+  rjwt({ secret: "my-secret-key" }).unless({
+    path: ["/v1/admin/post"]
+  })
+);
+server.use(function(req, res, next) {
+  if (req.url === "/v1/admin/post") {
+    return next();
+  }
+  let authorization = req.header("authorization").split(" ");
+  try {
+    var decoded = jwt.verify(authorization[1], "my-secret-key");
+    return next();
+  } catch (err) {
+    res.send(401, { massage: "Not authorized" });
+    return next();
+  }
+});
 server.use(bodyParser.json());
 server.get("/api/status", function(req, res) {
   res.send(200, "Api is alive!");
