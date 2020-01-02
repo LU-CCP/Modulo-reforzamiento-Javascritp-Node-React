@@ -3,10 +3,12 @@ const Router = require("restify-router").Router;
 const router = new Router();
 const DataBase = require("./config/db").DataBase;
 
+const rjwt = require("restify-jwt-community")
+const jwt = require("jsonwebtoken")
+
 const server = restify.createServer();
 server.use(restify.plugins.jsonBodyParser());
-server.get('/api/status', function (req, res) {
-    res.send(200, "Api is alive!!!!!");
+server.use(rjwt({secret: "my-secret-key"}).unless({path: ['/v1/authenticate']}))
 });
 
 router.add('', require('./routes'));
