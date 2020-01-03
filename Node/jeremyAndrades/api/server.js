@@ -8,6 +8,7 @@ const router = new Router();
 const mongoose = require("mongoose");
 const server = restify.createServer();
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const bodyParser = require("body-parser");
 server.use(bodyParser.json());
