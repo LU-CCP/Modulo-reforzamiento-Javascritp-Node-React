@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "dotenv": "^8.2.0",
+=======
+>>>>>>> master
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.3",
     "restify": "^8.5.1",
