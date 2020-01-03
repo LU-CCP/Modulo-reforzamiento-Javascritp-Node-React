@@ -11,6 +11,7 @@ const server = restify.createServer();
 
 const jwt = require("jsonwebtoken");
 const rjwt = require("restify-jwt-community");
+require("dotenv").config();
 server.use(bodyParser.json());
 server.use(
   rjwt({ secret: "my-secret-key" }).unless({
