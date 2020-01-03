@@ -17,11 +17,10 @@ router.post("/v1/admin", async function(req, res) {
     data = result;
   });
   if (data) {
-    let token = jwt.sign({ username, password }, "my-secret-key", {
-      expiresIn: 20
+    let token = jwt.sign({ username, password }, "my-secrect-key", {
+      expiresIn: 400
     });
-    console.log(token);
-    res.json(200, token);
+    res.json(200, { message: "Usuario autentificado correctamente", token });
   } else res.json(401, "Autentificación fallida!");
 });
 

@@ -7,6 +7,7 @@ const adminsRoutes = require("./routes/admins");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const rjwt = require("restify-jwt-community");
+require("dotenv").config();
 
 const server = restify.createServer();
 
@@ -43,7 +44,7 @@ router.add("", adminsRoutes);
 router.applyRoutes(server);
 
 server.listen(8080, async function() {
-  await mongoose.connect("mongodb://localhost/alfredo-lu", {
+  await mongoose.connect(process.env.DBNAME, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
