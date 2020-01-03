@@ -33,6 +33,6 @@ router.add('', require('./routes'));
 
 router.applyRoutes(server);
 server.listen(8080, async function () {
-    new DataBase(process.env.DBNAME).connet();
+    new DataBase('LUDB').connet();
     console.log("server running on port: ", 8080);
 })

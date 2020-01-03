@@ -2,20 +2,20 @@ const Router = require("restify-router").Router;
 const { studentModel } = require("../../models");
 const router = new Router();
 
-router.get("/students", async function(req, res) {
-  let students;
-  try {
-    await studentModel.find({}, function(err, result) {
-      if (err) {
-        console.log(err);
-      }
-      students = result;
-    });
-  } catch (err) {
-    res.send(500, err);
-  }
-
-  res.send(200, students);
+router.get('/students', async function (req, res) {
+    let students;
+    try {
+        await studentModel.find({}, function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+            students = result;
+        })
+    } catch (err) {
+        res.send(500, err);
+    }
+    console.log("students", students)
+    res.send(200, students);
 });
 
 router.post("/students", async function(req, res) {
