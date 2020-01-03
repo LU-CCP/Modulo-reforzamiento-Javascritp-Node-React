@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = require("mongoose").Schema;
 
-const adminsModel = mongoose.model(
+const adminModel = mongoose.model(
   "admins",
   new Schema({
     username: String,
-    pass: String
+    password: String
   })
 );
 
-module.exports = adminsModel;
+module.exports = adminModel;
