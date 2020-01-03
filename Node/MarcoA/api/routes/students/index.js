@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
 const Router = require("restify-router").Router;
+const mongoose = require("mongoose");
 const Schema = require("mongoose").Schema;
 const studentSchema = new Schema({
   name: String,
@@ -9,45 +9,41 @@ const studentSchema = new Schema({
 const router = new Router();
 const userModel = mongoose.model("students", studentSchema);
 // url base/v1/students
-router.get("/v1/students/", async function(request, response) {
-  let students;
 
-  await userModel.find({}, function(error, result) {
-    if (error) {
-      console.log(error);
+//Get
+router.get("/v1/students", async function(req, res) {
+  let students;
+  await userModel.find({}, function(err, result) {
+    if (err) {
+      console.log(err);
     }
     students = result;
-    console.log("Students", result);
+    console.log("students", result);
   });
-
-  response.send(200, students);
+  res.send(200, students);
 });
 
-//Add
-router.post("/v1/students/", async function(request, response) {
-  const { name, surname } = request.body;
-  let student = new userModel({ name, surname });
-  let results;
-
-  await student.save(function(error, student) {
-    if (error) {
-      console.log(error);
-    }
-    results = student;
+//delete
+router.del("/v1/students", async function(req, res) {
+  let students;
+  await userModel.deleteOne({ name: "Marco" }, function(err) {
+    if (err) return handleError(err);
+    // deleted at most one tank document
   });
+  res.send(200, students);
+});
 
-  response.send(200, results);
+//put
+router.put("/v1/students", async function(req, res) {
+  let students;
+  await userModel.updateOne({ name: "F_marquito" }, { name: "Marco" }, function(
+    err,
+    res
+  ) {
+    if (err) return handleError(err);
+    // deleted at most one tank document
+  });
+  res.send(200, students);
 });
 
 module.exports = router;
-
-//Delete
-router.del("/v1/students/:name", async function(request, response) {
-  console.log(request.params);
-
-  await userModel.deleteOne({ name: request.params.name }, function(err) {
-    if (err) console.log(err);
-  });
-
-  response.send(200, ":D");
-});

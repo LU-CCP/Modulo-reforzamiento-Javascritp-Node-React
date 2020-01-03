@@ -1,52 +1,30 @@
+const Router = require("restify-router").Router;
+const rjwt = require("restify-jwt-community");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const Router = require("restify-router").Router;
 const Schema = require("mongoose").Schema;
-const loginSchema = new Schema({
-  username: String,
+const adminSchema = new Schema({
+  user: String,
   password: String
 });
+
 const router = new Router();
-const loginModel = mongoose.model("admins", loginSchema);
+const userModel = mongoose.model("admins", adminSchema);
 
-router.get("/v1/login/", async function(request, response) {
-  let login;
-
-  await loginModel.find({}, function(error, result) {
-    if (error) {
-      console.log(error);
-    }
-    login = result;
-    console.log("Users", result);
-  });
-
-  response.send(200, login);
-});
-
-router.post("/v1/admin/", async function(request, response) {
-  const { username, password } = request.body;
-
-  await loginModel.find({ username, password }, function(error, result) {
-    if (error) {
-      console.log(error);
-    } else {
-      if (result.length === 0) {
-        response.send(401, "Recurso no encontrado");
-      } else {
-        let token = jwt.sign({ username, password }, "my-secret-key", {
-          expiresIn: 20
-        });
-        console.log("Token: ", token);
-        response.send(200, token);
-      }
+router.get("/v1/admin", async function(req, res) {
+  let admin;
+  await userModel.find({}, function(err, result) {
+    try {
+      let { user, password } = result;
+      let token = jwt.sign({ user, password }, "my-secret-key", {
+        expiresIn: 20
+      });
+      res.send({ result, token });
+    } catch (err) {
+      console.log(err);
     }
   });
-
-  // if ((username === "admin" && password === "admin")) {
-  //   response.send(200, response);
-  // } else {
-  //   response.send(400, response);
-  // }
+  res.send(401, admin);
 });
 
 module.exports = router;
