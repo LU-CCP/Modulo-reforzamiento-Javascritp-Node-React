@@ -14,7 +14,6 @@ router.get('/students', async function (req, res) {
     } catch (err) {
         res.send(500, err);
     }
-    console.log("students", students)
     res.send(200, students);
 });
 
