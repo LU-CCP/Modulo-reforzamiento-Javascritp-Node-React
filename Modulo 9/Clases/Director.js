@@ -1,1 +1,0 @@
-class Director extends Empleado {}
