@@ -1,7 +1,7 @@
 const Router = require("restify-router").Router;
 const mongoose = require("mongoose");
 const Schema = require("mongoose").Schema;
-const jsonWebToken = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const adminSchema = new Schema({
   username: String,
@@ -29,7 +29,7 @@ router.post("/v1/adminsPost", async function(req, res) {
   await userModel.findOne({ username, password }, function(err, result) {
     !result
       ? res.send(401, "Usuario no Autorizado")
-      : (token = jsonWebToken.sign({ username, password }, "my-secret-key", {
+      : (token = jwt.sign({ username, password }, "my-secret-key", {
           expiresIn: 20
         }));
     res.send(200, "Bienvenido " + username + "su token es: " + token);
