@@ -1,46 +1,66 @@
-const Router = require('restify-router').Router;
-const mongoose = require('mongoose');
-const Schema = require('mongoose').Schema;
-const studentSchema = new Schema({
-    name: String,
-    surname: String
-})
+const Router = require("restify-router").Router;
+const mongoose = require("mongoose");
+const Schema = require("mongoose").Schema;
 const router = new Router();
-const userModel = mongoose.model('students', studentSchema);
-const Students = require("../../models/students");
+const Students = require("../../models/Student");
+const StudentSchema = require("../../models/Student");
 
-router.get('/v1/students', async (req, res) => {
-    let students = '';
-    await userModel.find({}, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        students = result;
-        console.log('students', result);
-    })
-    res.json(200, students);
-});
-
-router.post("/v1/add", async (req, res, next) => {
-  const student = new Students(req.body);
-  await student.save();
-  res.json(200, "Agregado");
-});
-
-router.post("/v1/edit/:id", async (req, res, next) => {
-  const { id } = req.params;
-  await Students.update({ _id: id }, req.body);
-  res.json(200, "Actualizado");
-});
-
-router.get("/v1/delete/:id", async (req, res, next) => {
-  let { id } = req.params;
+router.get("/students", async (req, res) => {
+  let students;
   try {
-      await Students.remove({ _id: id });
-  } catch (error) {
-      res.send(500, {message:error});
+    await StudentSchema.find({}, (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      students = result;
+    });
+  } catch (err) {
+    res.send(500, err);
   }
-  res.json(200, "Borrado");
+  res.send(200, students);
+});
+
+router.post("/student/add", async (req, res) => {
+  try {
+    const student = new StudentSchema(req.body);
+    await student.save();
+    res.send(201, student);
+  } catch (err) {
+    res.send(500, err);
+  }
+  res.send(200, student);
+});
+
+router.put("/student/edit/:id", async function(req, res) {
+  let rowAffected;
+  try {
+    const { id } = req.params;
+    await StudentSchema.update({ _id: id }, req.body, (err, result) => {
+      if (err) {
+        res.send(500, err);
+      }
+      rowAffected = result;
+    });
+    res.send(200, rowAffected);
+  } catch (err) {
+    res.send(500, err);
+  }
+});
+
+router.del("/student/delete/:id", async (req, res) => {
+  let rowAffected;
+  try {
+    const { id } = req.params;
+    await StudentSchema.remove({ _id: id }, (err, result) => {
+      if (err) {
+        res.send(500, err);
+      }
+      rowAffected = result;
+    });
+    res.send(200, rowAffected);
+  } catch (err) {
+    res.send(500, err);
+  }
 });
 
 module.exports = router;
