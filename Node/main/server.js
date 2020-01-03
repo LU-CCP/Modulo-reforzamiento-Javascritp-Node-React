@@ -18,6 +18,7 @@ server.use(function (req, res, next) {
     let authorization = req.header('authorization').split(" ");
     try {
         var decoded = jwt.verify(authorization[1], 'my-secret-key');
+        return next();
     } catch (err) {
         res.send(401, { message: 'Not authorized' });
         return next();
