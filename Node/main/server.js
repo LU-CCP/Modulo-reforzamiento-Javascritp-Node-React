@@ -4,6 +4,7 @@ const router = new Router();
 const DataBase = require("./config/db").DataBase;
 const rjwt = require('restify-jwt-community');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const server = restify.createServer();
 server.use(restify.plugins.jsonBodyParser());

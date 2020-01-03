@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 router.post('/authenticate', async function (req, res, next) {
     const condition = req.body;
+    console.log(condition)
     if (!condition) {
         res.send(400, { message: "Credentials are required" });
         return next();

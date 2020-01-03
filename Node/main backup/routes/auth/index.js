@@ -13,7 +13,7 @@ router.post('/authenticate', async function (req, res, next) {
     try {
         let result = await adminModel.findOne(condition);
         if (!result) {
-            res.send(401, "authentication failed");
+            res.send(401, "authentication faileda");
             return next();
         }
 
