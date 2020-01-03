@@ -1,7 +1,7 @@
 import { createReducer } from 'reduxsauce';
 import produce from 'immer';
 
-import { SET_STATUS } from '../actions/example';
+import { SET_STATUS } from '../actions/students';
 
 const INITIAL_STATE = {
   data: {

@@ -6,7 +6,7 @@ const METHODS = {
 
 const URLS = {
   todos: {
-    getTodo: 'todo/'
+    getTodo: 'students'
   }
 };
 

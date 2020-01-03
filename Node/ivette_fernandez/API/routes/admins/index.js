@@ -16,7 +16,7 @@ router.post("/v1/admins", async function(req, res) {
   let status = 0;
   const { username, password } = req.body;
   let token = jwt.sign({ username, password }, "my-secret-key", {
-    expiresIn: 25
+    expiresIn: "2h"
   });
   console.log(token);
   await userModel.find({ username }, function(err, result) {
