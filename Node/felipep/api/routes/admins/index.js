@@ -21,7 +21,7 @@ router.post("/admin", async (req, res) => {
         console.log(err);
       }
       token = jsonWebToken.sign({ user, pass }, "my-secret-key", {
-        expiresIn: 300
+        expiresIn: 7200
       });
       admins = result;
     }
