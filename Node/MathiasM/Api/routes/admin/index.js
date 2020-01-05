@@ -18,7 +18,7 @@ router.post("/v1/login", async function(req, res) {
       res.send(401, "Usuario no autorizado");
     } else {
       let token = jwt.sign({ username, password }, "my-secret-key", {
-        expiresIn: 40
+        expiresIn: 9000000
       });
       res.send(200, "Bienvenido " + token);
     }
