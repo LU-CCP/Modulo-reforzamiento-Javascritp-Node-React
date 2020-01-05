@@ -9,11 +9,11 @@ import {
 } from 'redux-saga/effects';
 
 import { setText, setStatus, FETCH_TEXT } from '../actions/example';
-import { exampleApi } from '../services';
+import { studentApi } from '../services';
 import { MESSAGES } from '../config/messages';
 
 const { ERROR_MSG } = MESSAGES;
-const { todos: todosApi } = exampleApi;
+const { todos: todosApi } = studentApi;
 
 function* fetchText() {
   try {

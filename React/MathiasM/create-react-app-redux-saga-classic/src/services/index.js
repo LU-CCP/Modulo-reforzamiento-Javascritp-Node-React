@@ -1,8 +1,8 @@
 import { isCancel, CancelToken } from 'apisauce';
 
-import createExampleApi from './example';
+import createExampleApi from './students';
 import { TIMEOUTS } from './config';
 
-const exampleApi = createExampleApi();
+const studentApi = createExampleApi();
 
-export { CancelToken, isCancel, exampleApi, TIMEOUTS };
+export { CancelToken, isCancel, studentApi, TIMEOUTS };
