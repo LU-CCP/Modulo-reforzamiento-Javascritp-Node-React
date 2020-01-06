@@ -1,3 +1,3 @@
-import Example from './Example';
+import Example from './students';
 
 export { Example };
