@@ -11,6 +11,18 @@ const server = restify.createServer();
 
 const jwt = require("jsonwebtoken");
 const rjwt = require("restify-jwt-community");
+require("dotenv").config();
+
+const corsMiddleware = require("restify-cors-middleware");
+
+const cors = corsMiddleware({
+  origins: ["*"],
+  allowHeaders: ["Authorization"],
+  exposeHeaders: ["Authorization"]
+});
+
+server.pre(cors.preflight);
+server.use(cors.actual);
 server.use(bodyParser.json());
 server.use(
   rjwt({ secret: "my-secret-key" }).unless({
