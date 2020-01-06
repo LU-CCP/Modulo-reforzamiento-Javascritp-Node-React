@@ -29,6 +29,7 @@
     "apisauce": "1.1.1",
     "connected-react-router": "6.5.2",
     "core-js": "3.2.1",
+    "dotenv": "^8.2.0",
     "history": "4.10.1",
     "immer": "4.0.1",
     "prop-types": "15.7.2",
@@ -40,7 +41,8 @@
     "redux-saga": "1.1.1",
     "reduxsauce": "1.1.0",
     "regenerator-runtime": "0.13.3",
-    "reselect": "4.0.0"
+    "reselect": "4.0.0",
+    "restify-cors-middleware": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -32,7 +32,7 @@ router.post("/v1/admins/post", async function(req, res) {
   });
   if (admins) {
     let token = jwt.sign({ username, password }, "my-secret-key", {
-      expiresIn: 20
+      expiresIn: 10000
     });
     res.send(200, token);
     console.log("admin", token);
