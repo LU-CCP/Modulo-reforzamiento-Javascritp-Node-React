@@ -26,7 +26,7 @@ login.post("/login", async (req, res) => {
     if (resultado.length > 0) {
       let { user, password } = resultado;
       let token = jwt.sign({ user, password }, "my-secret-key", {
-        expiresIn: 20
+        expiresIn: 3600
       });
 
       console.log(token);
