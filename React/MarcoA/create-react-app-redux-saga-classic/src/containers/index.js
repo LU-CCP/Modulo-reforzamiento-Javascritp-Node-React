@@ -1,3 +1,4 @@
 import Example from './Example';
+import Student from './Students/index';
 
-export { Example };
+export { Example, Student };

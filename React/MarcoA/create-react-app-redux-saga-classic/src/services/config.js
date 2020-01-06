@@ -1,12 +1,13 @@
 const TIMEOUTS = {
-  GLOBAL: 20e3
+  GLOBAL: 273812e3
 };
 
 const config = {
   baseURL: null,
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    authorization: 'skere'
   },
   timeout: TIMEOUTS.GLOBAL
 };
