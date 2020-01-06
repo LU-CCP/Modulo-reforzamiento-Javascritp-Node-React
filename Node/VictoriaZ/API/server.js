@@ -1,6 +1,8 @@
 const restify = require("restify");
 const Router = require("restify-router").Router;
 const router = new Router();
+
+require("dotenv").config();
 const bodyParser = require("body-parser");
 
 const studentsRoutes = require("./routes/students");
