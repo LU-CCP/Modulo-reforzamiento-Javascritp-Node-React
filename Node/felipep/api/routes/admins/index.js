@@ -10,7 +10,7 @@ const adminSchema = new Schema({
 });
 const adminModel = mongoose.model("admins", adminSchema);
 
-router.post("/v1/admin", async (req, res) => {
+router.post("/admin", async (req, res) => {
   let admins = "";
   let token = "";
   const { user, pass } = req.body;
@@ -21,7 +21,7 @@ router.post("/v1/admin", async (req, res) => {
         console.log(err);
       }
       token = jsonWebToken.sign({ user, pass }, "my-secret-key", {
-        expiresIn: 20
+        expiresIn: 7200
       });
       admins = result;
     }
