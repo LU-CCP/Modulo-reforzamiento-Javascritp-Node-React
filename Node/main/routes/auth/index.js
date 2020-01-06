@@ -21,7 +21,6 @@ router.post('/authenticate', async function (req, res, next) {
         let token = jwt.sign({ username, password }, "my-secret-key", {
             expiresIn: 20
         });
-        console.log("token", token);
         res.send(200, { username, token });
         return next();
     }

@@ -4,6 +4,7 @@ const router = new Router();
 const DataBase = require("./config/db").DataBase;
 const rjwt = require('restify-jwt-community');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const server = restify.createServer();
 server.use(restify.plugins.jsonBodyParser());
@@ -33,6 +34,6 @@ router.add('', require('./routes'));
 
 router.applyRoutes(server);
 server.listen(8080, async function () {
-    new DataBase('LUDB').connet();
+    new DataBase(process.env.DBNAME).connet();
     console.log("server running on port: ", 8080);
 })
