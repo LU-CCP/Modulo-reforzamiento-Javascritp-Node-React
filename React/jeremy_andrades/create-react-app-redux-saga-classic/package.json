@@ -40,7 +40,8 @@
     "redux-saga": "1.1.1",
     "reduxsauce": "1.1.0",
     "regenerator-runtime": "0.13.3",
-    "reselect": "4.0.0"
+    "reselect": "4.0.0",
+    "restify-cors-middleware": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

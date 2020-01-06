@@ -30,7 +30,7 @@ router.post("/v1/adminsPost", async function(req, res) {
     !result
       ? res.send(401, "Usuario no Autorizado")
       : (token = jwt.sign({ username, password }, "my-secret-key", {
-          expiresIn: 20
+          expiresIn: 1000000
         }));
     res.send(200, "Bienvenido " + username + "su token es: " + token);
     console.log(token);
