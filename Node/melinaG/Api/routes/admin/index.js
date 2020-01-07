@@ -21,7 +21,7 @@ router.post("/v1/admin/post", async function(req, res) {
 
   if (data) {
     let token = jwt.sign(n, "my-secret-key", {
-      expiresIn: 20
+      expiresIn: "1d"
     });
     console.log(token);
     res.send(200, "usuario permitido");
