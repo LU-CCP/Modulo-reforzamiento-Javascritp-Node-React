@@ -2,14 +2,16 @@ const TIMEOUTS = {
   GLOBAL: 20e3
 };
 
-const config = {
+const config ={
   baseURL: null,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  },
-  timeout: TIMEOUTS.GLOBAL
+  headers: {accept: 'Aplication/json',
+'Content-Type': 'Aplication/json',
+Authorization: 'Bearer TOKENINSERTARAQUI'
+},
+timeout: TIMEOUTS.GLOBAL
 };
+
+
 
 export { TIMEOUTS };
 
