@@ -1,13 +1,7 @@
-const METHODS = {
-  todos: {
-    getTodo: 'GET'
+const config = {
+  baseURL: null,
+  headers: {
+    Accept: 'application/json',
+    authorization: 'Bearer token'
   }
 };
-
-const URLS = {
-  todos: {
-    getTodo: 'todos/'
-  }
-};
-
-export { METHODS, URLS };

@@ -1,3 +1,4 @@
 const ROOT = '/';
+const STUDENTS = '/students';
 
-export { ROOT };
+export { ROOT, STUDENTS };
