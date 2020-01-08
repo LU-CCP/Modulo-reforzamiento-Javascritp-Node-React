@@ -8,8 +8,17 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const rjwt = require("restify-jwt-community");
 require("dotenv").config();
+const corsMiddleware = require("restify-cors-middleware");
+
+const cors = corsMiddleware({
+  origins: ["*"],
+  allowHeaders: ["Authorization"],
+  exposeHeaders: ["Authorization"]
+});
 
 const server = restify.createServer();
+server.pre(cors.preflight);
+server.use(cors.actual);
 
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
